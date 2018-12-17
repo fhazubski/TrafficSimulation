@@ -1,6 +1,5 @@
 #pragma once
-
-#include "simulation/types.h"
+#include "include/types.h"
 #include <limits>
 
 namespace TSP {
@@ -8,9 +7,6 @@ namespace TSP {
 // editable variables
 constexpr tsp_int meter = 1000;
 constexpr tsp_int milisecond = 1;
-
-constexpr tsp_int requiredLength = 10 * kilometer;
-constexpr tsp_int requiredTimespan = 1 * day;
 
 // other variables, dependending on editables
 constexpr tsp_int kilometer = 1000 * meter;
@@ -24,7 +20,10 @@ constexpr tsp_int maxLength = std::numeric_limits<tsp_int>::max();
 constexpr tsp_int maxTime = std::numeric_limits<tsp_int>::max();
 
 // ensure that simulation will support required constraints
-static_assert(maxLength > requiredLength);
-static_assert(maxTime > requiredTimespan);
+constexpr tsp_int requiredLength = 10 * kilometer;
+constexpr tsp_int requiredTimespan = 1 * day;
+
+static_assert(maxLength > requiredLength, "Required length is not reachable");
+static_assert(maxTime > requiredTimespan, "Required timespan is not reachable");
 
 } // namespace TSP
