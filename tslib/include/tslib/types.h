@@ -23,9 +23,18 @@ struct tsp_vehicle_position : tsp_position, tsp_rotation {
 struct tsp_vehicle_base {
   tsp_float width;
   tsp_float height;
-  tsp_float frontAxle;
-  tsp_float rearAxle;
+  tsp_float axleDistance;
   tsp_float velocity;
+  tsp_float axleAngle;
+};
+
+struct tsp_engine {
+  tsp_float desiredVelocity;
+  tsp_float force;
+};
+
+struct tsp_steeringAxle {
+  tsp_float desiredAxleAngle;
 };
 
 struct tsp_vehicle : tsp_vehicle_position, tsp_vehicle_base {};

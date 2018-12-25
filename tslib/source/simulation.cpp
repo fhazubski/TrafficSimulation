@@ -1,5 +1,49 @@
 #include "source/simulation.h"
+#include "source/helpers/helper_math.h"
 
-void TSP::Simulation::addVehicle(tsp_vehicle &vehicle) {
-  vehicles.push_back(vehicle);
+namespace TSP {
+
+tsp_vehicle *Simulation::reserveMemory(tsp_int count) {
+  if (vehicles != nullptr) {
+    delete[] vehicles;
+  }
+  vehicles = new tsp_vehicle[count];
+  reservedVehiclesCount = count;
+  vehiclesCount = 0;
+  nextFree = 0;
+  return vehicles;
 }
+
+bool Simulation::addVehicle(tsp_float x, tsp_float y, tsp_float width,
+                            tsp_float height, tsp_float axleDistance,
+                            tsp_float rotation, tsp_float velocity) {
+  if (nextFree >= reservedVehiclesCount) {
+    return false;
+  }
+
+  vehicles[nextFree].id = nextFree;
+  vehicles[nextFree].x = x;
+  vehicles[nextFree].y = y;
+  vehicles[nextFree].width = width;
+  vehicles[nextFree].height = height;
+  vehicles[nextFree].axleDistance = axleDistance;
+  vehicles[nextFree].rotation = rotation;
+  vehicles[nextFree].velocity = velocity;
+  nextFree++;
+
+  return true;
+}
+
+bool Simulation::setTime(tsp_float newTime) {
+  if (newTime <= time) {
+    return false;
+  }
+
+  tsp_float timeDifference = newTime - time;
+  for (tsp_int i = 0; i < vehiclesCount; i++) {
+    HelperMath::updatePosition(vehicles[i], 0.0, 0.0, timeDifference);
+  }
+  return true;
+}
+
+} // namespace TSP

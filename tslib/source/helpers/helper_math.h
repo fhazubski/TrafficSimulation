@@ -11,6 +11,14 @@ public:
   template <typename T> static bool inRange(T value, T smaller, T bigger) {
     return !std::less<T>()(value, smaller) && !std::less<T>()(bigger, value);
   }
+
+  static tsp_float turnRadius(const tsp_float axleDistance,
+                              const tsp_float axleAngle);
+
+  static void updatePosition(tsp_vehicle &vehicle,
+                             const tsp_float velocityChange,
+                             const tsp_float axleAngleChange,
+                             const tsp_float timeChange);
 };
 
 } // namespace TSP

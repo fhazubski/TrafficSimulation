@@ -6,10 +6,18 @@ namespace TSP {
 
 class Simulation {
 public:
-  void addVehicle(tsp_vehicle &vehicle);
+  tsp_vehicle *reserveMemory(tsp_int count);
+  bool addVehicle(tsp_float x, tsp_float y, tsp_float width, tsp_float height,
+                  tsp_float axleDistance, tsp_float rotation,
+                  tsp_float velocity);
+  bool setTime(tsp_float newTime);
 
 private:
-  std::vector<tsp_vehicle> vehicles;
+  tsp_vehicle *vehicles = nullptr;
+  tsp_int reservedVehiclesCount;
+  tsp_int vehiclesCount;
+  tsp_int nextFree;
+  tsp_float time = 0;
 };
 
 } // namespace TSP
