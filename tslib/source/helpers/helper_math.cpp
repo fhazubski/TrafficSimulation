@@ -1,4 +1,5 @@
 #include "source/helpers/helper_math.h"
+#include <iostream>
 #include <cmath>
 
 #define PI                                                                     \
@@ -18,7 +19,8 @@ void HelperMath::updatePosition(tsp_vehicle &vehicle,
   tsp_float distance =
       (vehicle.velocity + velocityChange * timeChange / 2.0) * timeChange;
 
-  if (vehicle.axleAngle == 0.0 && (axleAngleChange == 0.0 || timeChange == 0.0)) {
+  if (vehicle.axleAngle == 0.0 &&
+      (axleAngleChange == 0.0 || timeChange == 0.0)) {
     vehicle.x += std::cos(vehicle.rotation) * distance;
     vehicle.y += std::sin(vehicle.rotation) * distance;
     return;
@@ -29,12 +31,12 @@ void HelperMath::updatePosition(tsp_vehicle &vehicle,
   if (maxAxleAngle < minAxleAngle) {
     std::swap(minAxleAngle, maxAxleAngle);
   }
-  tsp_float radius =
-      (std::log(std::sin(maxAxleAngle)) - std::log(std::sin(minAxleAngle))) *
-      vehicle.axleDistance;
+  tsp_float radius = std::tan(vehicle.axleAngle) *
+      vehicle.axleDistance; // TODO calculate proper radius
   tsp_float beta = distance / radius;
   tsp_position vector = {std::sin(beta) * radius,
                          radius * (1.0 - std::cos(beta))};
+
   vehicle.x += std::cos(vehicle.rotation) * vector.x -
                std::sin(vehicle.rotation) * vector.y;
   vehicle.y += std::sin(vehicle.rotation) * vector.x +

@@ -26,10 +26,12 @@ bool Simulation::addVehicle(tsp_float x, tsp_float y, tsp_float width,
   vehicles[nextFree].y = y;
   vehicles[nextFree].width = width;
   vehicles[nextFree].height = height;
+  vehicles[nextFree].axleAngle = 0.0;
   vehicles[nextFree].axleDistance = axleDistance;
   vehicles[nextFree].rotation = rotation;
   vehicles[nextFree].velocity = velocity;
   nextFree++;
+  vehiclesCount = nextFree;
 
   return true;
 }
