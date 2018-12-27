@@ -43,7 +43,7 @@ bool Simulation::setTime(tsp_float newTime) {
     return false;
   }
 
-  tsp_float timeDifference = newTime - time;
+  tsp_float timeDifference = (newTime - time) / 1000.0;
   for (tsp_int i = 0; i < vehiclesCount; i++) {
     HelperMath::updatePosition(vehicles[i], 0.0, 0.0, timeDifference);
   }
