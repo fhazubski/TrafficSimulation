@@ -24,6 +24,7 @@ struct tsp_vehicle_base {
   tsp_float width;
   tsp_float height;
   tsp_float axleDistance;
+  tsp_float frontWheelsDistance;
   tsp_float velocity;
   tsp_float axleAngle;
 };

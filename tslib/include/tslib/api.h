@@ -9,6 +9,7 @@ TSP::tsp_vehicle TSLIB_EXPORT *tspReserveMemory(TSP::tsp_int vehiclesCount);
 bool TSLIB_EXPORT tspAddVehicle(TSP::tsp_float x, TSP::tsp_float y,
                                 TSP::tsp_float width, TSP::tsp_float height,
                                 TSP::tsp_float axleDistance,
+                                TSP::tsp_float frontWheelsDistance,
                                 TSP::tsp_float rotation,
                                 TSP::tsp_float velocity);
 

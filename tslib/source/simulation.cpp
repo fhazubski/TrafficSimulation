@@ -16,7 +16,8 @@ tsp_vehicle *Simulation::reserveMemory(tsp_int count) {
 
 bool Simulation::addVehicle(tsp_float x, tsp_float y, tsp_float width,
                             tsp_float height, tsp_float axleDistance,
-                            tsp_float rotation, tsp_float velocity) {
+                            tsp_float frontWheelsDistance, tsp_float rotation,
+                            tsp_float velocity) {
   if (nextFree >= reservedVehiclesCount) {
     return false;
   }
@@ -27,6 +28,7 @@ bool Simulation::addVehicle(tsp_float x, tsp_float y, tsp_float width,
   vehicles[nextFree].width = width;
   vehicles[nextFree].height = height;
   vehicles[nextFree].axleAngle = 0.0;
+  vehicles[nextFree].frontWheelsDistance = frontWheelsDistance;
   vehicles[nextFree].axleDistance = axleDistance;
   vehicles[nextFree].rotation = rotation;
   vehicles[nextFree].velocity = velocity;

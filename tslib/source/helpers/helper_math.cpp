@@ -25,14 +25,18 @@ void HelperMath::updatePosition(tsp_vehicle &vehicle,
     vehicle.y += std::sin(vehicle.rotation) * distance;
     return;
   }
-
-  tsp_float minAxleAngle = vehicle.axleAngle;
-  tsp_float maxAxleAngle = vehicle.axleAngle + axleAngleChange * timeChange;
-  if (maxAxleAngle < minAxleAngle) {
-    std::swap(minAxleAngle, maxAxleAngle);
-  }
-  tsp_float radius = std::tan(vehicle.axleAngle) *
-      vehicle.axleDistance; // TODO calculate proper radius
+  tsp_float rearTiersAverageRadius =
+      vehicle.axleDistance / std::tan(vehicle.axleAngle);
+  tsp_float pow2AxleDistance = std::pow(vehicle.axleDistance, 2);
+  tsp_float halfFrontWheelsDistance = vehicle.frontWheelsDistance / 2.0;
+  // calculate the radius as an average from all of the wheels
+  tsp_float radius =
+      2.0 * rearTiersAverageRadius +
+      std::sqrt(pow2AxleDistance +
+                std::pow(rearTiersAverageRadius - halfFrontWheelsDistance, 2)) +
+      std::sqrt(pow2AxleDistance +
+                std::pow(rearTiersAverageRadius + halfFrontWheelsDistance, 2));
+  radius /= 4.0;
   tsp_float beta = distance / radius;
   tsp_position vector = {std::sin(beta) * radius,
                          radius * (1.0 - std::cos(beta))};

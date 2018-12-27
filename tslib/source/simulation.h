@@ -8,8 +8,8 @@ class Simulation {
 public:
   tsp_vehicle *reserveMemory(tsp_int count);
   bool addVehicle(tsp_float x, tsp_float y, tsp_float width, tsp_float height,
-                  tsp_float axleDistance, tsp_float rotation,
-                  tsp_float velocity);
+                  tsp_float axleDistance, tsp_float frontWheelsDistance,
+                  tsp_float rotation, tsp_float velocity);
   bool setTime(tsp_float newTime);
 
 private:

@@ -12,7 +12,8 @@ TSP::tsp_vehicle *tspReserveMemory(TSP::tsp_int vehiclesCount) {
 
 bool tspAddVehicle(TSP::tsp_float x, TSP::tsp_float y, TSP::tsp_float width,
                    TSP::tsp_float height, TSP::tsp_float axleDistance,
-                   TSP::tsp_float rotation, TSP::tsp_float velocity) {
+                   TSP::tsp_float frontWheelsDistance, TSP::tsp_float rotation,
+                   TSP::tsp_float velocity) {
   if (!HelperMath::inRange<tsp_float>(axleDistance, 0.0, height) &&
       axleDistance != 0.0) {
     std::cerr << "Axle value is less than or equal zero or greater than height"
@@ -20,8 +21,8 @@ bool tspAddVehicle(TSP::tsp_float x, TSP::tsp_float y, TSP::tsp_float width,
     return false;
   }
 
-  return simulation.addVehicle(x, y, width, height, axleDistance, rotation,
-                               velocity);
+  return simulation.addVehicle(x, y, width, height, axleDistance,
+                               frontWheelsDistance, rotation, velocity);
 }
 
 bool tspSetTime(TSP::tsp_float time) { return simulation.setTime(time); }
