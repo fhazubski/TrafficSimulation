@@ -15,6 +15,7 @@ class Simulation : public QObject {
 public:
   explicit Simulation(QObject *parent = nullptr);
   QQmlListProperty<Vehicle> vehicles();
+  TSP::tsp_obstacle_line *obstacles();
 
 public slots:
   void setTime(qreal time);
@@ -29,6 +30,7 @@ private:
   QList<Vehicle *> m_vehicles;
 
   TSP::tsp_vehicle *m_tspVehicles = nullptr;
+  TSP::tsp_obstacle_line *m_tspObstacles = nullptr;
 };
 
 #endif // SIMULATION_H

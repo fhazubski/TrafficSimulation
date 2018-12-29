@@ -1,18 +1,27 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
 import Checkerboard 1.0
+import Obstacles 1.0
 
 Window {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+
+    onWidthChanged: {
+        console.log(width, " ", height)
+    }
+
+    QtObject {
+        id: globals
+        readonly property real pixelsPerMeter: 15.0
+    }
 
     Item {
         anchors.fill: parent
         Component.onCompleted: {
-            simulation.addVehicle(0, 0, 1.5, 3.5, 0, 0)
-            simulation.addVehicle(0, 0, 1.5, 3.5, 0, 20)
+            simulation.addVehicle(width / 2 / globals.pixelsPerMeter, 3.0, 1.5, 3.5, 0, 0)
+            simulation.addVehicle(width / 2 / globals.pixelsPerMeter, 3.0, 1.5, 3.5, 0, 50)
             simulation.overrideAxleAngle(1, 15)
         }
 
@@ -23,7 +32,7 @@ Window {
             property real time: 0
             onTriggered: {
                 time += interval
-                simulation.setTime(time);
+                simulation.setTime(time)
             }
         }
     }
@@ -35,19 +44,21 @@ Window {
         color2: "grey"
     }
 
-    Item {
-        x: parent.width / 2
-        Repeater {
-            model: simulation.vehicles
-            Rectangle {
-                id: rect
-                x: -width / 2 + simulation.vehicles[index].x * 15
-                y: width * 2 - height / 2 + simulation.vehicles[index].y * 15
-                width: simulation.vehicles[index].width * 15
-                height: simulation.vehicles[index].height * 15
-                rotation: 90 + simulation.vehicles[index].rotation
-                color: Qt.rgba(Math.random(),Math.random(),Math.random(),1);
-            }
+    Obstacles {
+        anchors.fill: parent
+        meterInPixels: globals.pixelsPerMeter
+    }
+
+    Repeater {
+        model: simulation.vehicles
+        Rectangle {
+            id: rect
+            x: simulation.vehicles[index].x * globals.pixelsPerMeter
+            y: simulation.vehicles[index].y * globals.pixelsPerMeter
+            width: simulation.vehicles[index].width * globals.pixelsPerMeter
+            height: simulation.vehicles[index].height * globals.pixelsPerMeter
+            rotation: 90 + simulation.vehicles[index].rotation
+            color: Qt.rgba(Math.random(),Math.random(),Math.random(),1);
         }
     }
 }

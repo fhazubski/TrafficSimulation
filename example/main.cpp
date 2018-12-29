@@ -1,4 +1,5 @@
 #include "checkerboard.h"
+#include "obstacles.h"
 #include "simulation.h"
 #include "vehicle.h"
 #include <QGuiApplication>
@@ -14,6 +15,7 @@ int main(int argc, char *argv[]) {
   engine.rootContext()->setContextProperty("simulation", &simulation);
   qmlRegisterType<Vehicle>("Vehicle", 1, 0, "Vehicle");
   qmlRegisterType<Checkerboard>("Checkerboard", 1, 0, "Checkerboard");
+  qmlRegisterType<Obstacles>("Obstacles", 1, 0, "Obstacles");
 
   engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
   if (engine.rootObjects().isEmpty())

@@ -16,7 +16,8 @@ SOURCES += \
     main.cpp \
     simulation.cpp \
     vehicle.cpp \
-    checkerboard.cpp
+    checkerboard.cpp \
+    obstacles.cpp
 
 RESOURCES += qml.qrc
 
@@ -36,4 +37,6 @@ include(tslib.pri)
 HEADERS += \
     simulation.h \
     vehicle.h \
-    checkerboard.h
+    checkerboard.h \
+    simulation_lines.h \
+    obstacles.h

@@ -1,13 +1,18 @@
 #include "simulation.h"
+#include "simulation_lines.h"
 #include "tslib/api.h"
 
 Simulation::Simulation(QObject *parent) : QObject(parent) {
-  m_tspVehicles = tspReserveMemory(10);
+  m_tspVehicles = tspReserveVehicleMemory(10);
+  m_tspObstacles = tspReserveObstacleMemory(linesCount);
+  memcpy(m_tspObstacles, lines, linesCount * sizeof(TSP::tsp_obstacle_line));
 }
 
 QQmlListProperty<Vehicle> Simulation::vehicles() {
   return QQmlListProperty<Vehicle>(this, this->m_vehicles);
 }
+
+TSP::tsp_obstacle_line *Simulation::obstacles() { return m_tspObstacles; }
 
 void Simulation::setTime(qreal time) {
   tspSetTime(time);
