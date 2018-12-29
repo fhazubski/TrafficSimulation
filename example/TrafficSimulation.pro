@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     simulation.cpp \
-    vehicle.cpp
+    vehicle.cpp \
+    checkerboard.cpp
 
 RESOURCES += qml.qrc
 
@@ -34,4 +35,5 @@ include(tslib.pri)
 
 HEADERS += \
     simulation.h \
-    vehicle.h
+    vehicle.h \
+    checkerboard.h

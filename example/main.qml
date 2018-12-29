@@ -1,5 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
+import Checkerboard 1.0
 
 Window {
     visible: true
@@ -8,26 +9,44 @@ Window {
     title: qsTr("Hello World")
 
     Item {
+        anchors.fill: parent
+        Component.onCompleted: {
+            simulation.addVehicle(0, 0, 1.5, 3.5, 0, 20)
+            simulation.overrideAxleAngle(0, 15)
+        }
+
         Timer {
-            interval: 50
+            interval: 16
             repeat: true
             running: true
             property real time: 0
             onTriggered: {
-                time += interval/10
+                time += interval
                 simulation.setTime(time);
-                console.log(simulation.vehicles.length)
-                rect.x = simulation.vehicles[0].x
-                rect.y = simulation.vehicles[0].y
-                rect.rotation = simulation.vehicles[0].rotation
             }
         }
     }
 
-    Rectangle {
-        id: rect
-        width: 100
-        height: 50
-        color: "red"
+    Checkerboard {
+        anchors.fill: parent
+        step: 50
+        color1: "white"
+        color2: "grey"
+    }
+
+    Item {
+        x: parent.width / 2
+        Repeater {
+            model: simulation.vehicles
+            Rectangle {
+                id: rect
+                x: simulation.vehicles[index].x * 15
+                y: simulation.vehicles[index].y * 15
+                width: simulation.vehicles[index].width * 15
+                height: simulation.vehicles[index].height * 15
+                rotation: 90 + simulation.vehicles[index].rotation
+                color: "red"
+            }
+        }
     }
 }

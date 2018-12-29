@@ -30,6 +30,12 @@ signals:
   void rotationChanged();
 
 private:
+  void setX(qreal x);
+  void setY(qreal y);
+  void setWidth(qreal width);
+  void setHeight(qreal height);
+  void setRotation(qreal rotation);
+
   qreal m_x = 0.0;
   qreal m_y = 0.0;
   qreal m_width = 10.0;
