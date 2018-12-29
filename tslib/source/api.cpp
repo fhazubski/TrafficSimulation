@@ -4,10 +4,12 @@
 #include "tslib/types.h"
 #include <iostream>
 
-void foo() {}
+TSP::tsp_vehicle *tspReserveVehicleMemory(TSP::tsp_int vehiclesCount) {
+  return simulation.reserveVehicleMemory(vehiclesCount);
+}
 
-TSP::tsp_vehicle *tspReserveMemory(TSP::tsp_int vehiclesCount) {
-  return simulation.reserveMemory(vehiclesCount);
+TSP::tsp_obstacle_line *tspReserveObstacleMemory(TSP::tsp_int obstacleCount) {
+  return simulation.reserveObstacleMemory(obstacleCount);
 }
 
 bool tspAddVehicle(TSP::tsp_float x, TSP::tsp_float y, TSP::tsp_float width,

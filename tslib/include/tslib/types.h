@@ -12,6 +12,21 @@ struct tsp_position {
   tsp_float y;
 };
 
+struct tsp_line {
+  tsp_position start;
+  tsp_position end;
+};
+
+enum class tsp_obstacle_type {
+  solid,
+  road_line,
+};
+
+struct tsp_obstacle_line {
+  tsp_obstacle_type type;
+  tsp_line line;
+};
+
 struct tsp_rotation {
   tsp_float rotation;
 };

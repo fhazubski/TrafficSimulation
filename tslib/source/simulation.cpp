@@ -3,7 +3,7 @@
 
 namespace TSP {
 
-tsp_vehicle *Simulation::reserveMemory(tsp_int count) {
+tsp_vehicle *Simulation::reserveVehicleMemory(tsp_int count) {
   if (vehicles != nullptr) {
     delete[] vehicles;
   }
@@ -12,6 +12,15 @@ tsp_vehicle *Simulation::reserveMemory(tsp_int count) {
   vehiclesCount = 0;
   nextFree = 0;
   return vehicles;
+}
+
+tsp_obstacle_line *Simulation::reserveObstacleMemory(tsp_int count) {
+  if (obstacles != nullptr) {
+    delete[] obstacles;
+  }
+  obstacles = new tsp_obstacle_line[count];
+  obstacleLinesCount = count;
+  return obstacles;
 }
 
 bool Simulation::addVehicle(tsp_float x, tsp_float y, tsp_float width,
