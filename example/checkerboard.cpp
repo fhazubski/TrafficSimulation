@@ -12,8 +12,10 @@ void Checkerboard::paint(QPainter *painter) {
   QBrush brush2((QColor(m_color2)));
   painter->fillRect(contentsBoundingRect(), brush1);
 
-  for (int y = 0; y < height(); y += m_step) {
-    for (int x = 0; x < width(); x += m_step) {
+  for (int y = -m_step + (static_cast<int>(height() / 2.0) % m_step);
+       y < height(); y += m_step) {
+    for (int x = -m_step + (static_cast<int>(width() / 2.0) % m_step);
+         x < width(); x += m_step) {
       if (((x + y) / m_step) % 2 == 0) {
         painter->fillRect(QRectF(x, y, m_step, m_step), brush2);
       }

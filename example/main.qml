@@ -11,8 +11,9 @@ Window {
     Item {
         anchors.fill: parent
         Component.onCompleted: {
+            simulation.addVehicle(0, 0, 1.5, 3.5, 0, 0)
             simulation.addVehicle(0, 0, 1.5, 3.5, 0, 20)
-            simulation.overrideAxleAngle(0, 15)
+            simulation.overrideAxleAngle(1, 15)
         }
 
         Timer {
@@ -40,12 +41,12 @@ Window {
             model: simulation.vehicles
             Rectangle {
                 id: rect
-                x: simulation.vehicles[index].x * 15
-                y: simulation.vehicles[index].y * 15
+                x: -width / 2 + simulation.vehicles[index].x * 15
+                y: width * 2 - height / 2 + simulation.vehicles[index].y * 15
                 width: simulation.vehicles[index].width * 15
                 height: simulation.vehicles[index].height * 15
                 rotation: 90 + simulation.vehicles[index].rotation
-                color: "red"
+                color: Qt.rgba(Math.random(),Math.random(),Math.random(),1);
             }
         }
     }
