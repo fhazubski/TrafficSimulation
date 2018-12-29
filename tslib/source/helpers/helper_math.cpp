@@ -1,6 +1,6 @@
 #include "source/helpers/helper_math.h"
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 #define PI                                                                     \
   (3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196442)
@@ -10,6 +10,13 @@ namespace TSP {
 tsp_float HelperMath::turnRadius(const tsp_float axleDistance,
                                  const tsp_float axleAngle) {
   return std::tan(tsp_float(90.0) - axleAngle) * axleDistance;
+}
+
+tsp_float HelperMath::degreeToRadian(const tsp_float value) {
+  return value * PI / 180.0;
+}
+tsp_float HelperMath::kmphToMps(const tsp_float value) {
+  return value * 1000.0 / 3600.0;
 }
 
 void HelperMath::updatePosition(tsp_vehicle &vehicle,

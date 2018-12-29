@@ -38,6 +38,10 @@ bool Simulation::addVehicle(tsp_float x, tsp_float y, tsp_float width,
   return true;
 }
 
+void Simulation::overrideAxleAngle(TSP::tsp_id vehicle, TSP::tsp_float angle) {
+  vehicles[vehicle].axleAngle = angle;
+}
+
 bool Simulation::setTime(tsp_float newTime) {
   if (newTime <= time) {
     return false;
@@ -47,6 +51,7 @@ bool Simulation::setTime(tsp_float newTime) {
   for (tsp_int i = 0; i < vehiclesCount; i++) {
     HelperMath::updatePosition(vehicles[i], 0.0, 0.0, timeDifference);
   }
+  time = newTime;
   return true;
 }
 

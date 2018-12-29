@@ -1,7 +1,7 @@
-#include "tslib/types.h"
 #include "source/globals.h"
 #include "source/helpers/helper_id.h"
 #include "source/helpers/helper_math.h"
+#include "tslib/types.h"
 #include <iostream>
 
 void foo() {}
@@ -21,8 +21,16 @@ bool tspAddVehicle(TSP::tsp_float x, TSP::tsp_float y, TSP::tsp_float width,
     return false;
   }
 
+  rotation = HelperMath::degreeToRadian(rotation);
+  velocity = HelperMath::kmphToMps(velocity);
+
   return simulation.addVehicle(x, y, width, height, axleDistance,
                                frontWheelsDistance, rotation, velocity);
+}
+
+void tspOverrideAxleAngle(TSP::tsp_id vehicle, TSP::tsp_float angle) {
+  angle = HelperMath::degreeToRadian(angle);
+  simulation.overrideAxleAngle(vehicle, angle);
 }
 
 bool tspSetTime(TSP::tsp_float time) { return simulation.setTime(time); }

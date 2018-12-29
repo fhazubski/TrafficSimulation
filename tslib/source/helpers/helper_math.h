@@ -12,6 +12,9 @@ public:
     return !std::less<T>()(value, smaller) && !std::less<T>()(bigger, value);
   }
 
+  static tsp_float degreeToRadian(const tsp_float value);
+  static tsp_float kmphToMps(const tsp_float value);
+
   static tsp_float turnRadius(const tsp_float axleDistance,
                               const tsp_float axleAngle);
 
