@@ -13,11 +13,14 @@ void Obstacles::paint(QPainter *painter) {
 
   QBrush brush(QColor("#000000"));
   painter->setBrush(brush);
-  for (auto line : lines) {
-    painter->drawLine(line.line.start.x * m_meterInPixels,
-                      line.line.start.y * m_meterInPixels,
-                      line.line.end.x * m_meterInPixels,
-                      line.line.end.y * m_meterInPixels);
+  for (size_t i = 0; i < road1.lanesCount; i++) {
+    for (size_t j = 0; j < road1.lanes[i]->pointsCount - 1; j++) {
+      painter->drawLine(
+          (road1.lanes[i]->points[j].x + m_xOffset) * m_meterInPixels,
+          (road1.lanes[i]->points[j].y + m_yOffset) * m_meterInPixels,
+          (road1.lanes[i]->points[j + 1].x + m_xOffset) * m_meterInPixels,
+          (road1.lanes[i]->points[j + 1].y + m_yOffset) * m_meterInPixels);
+    }
   }
   /*
   QBrush brush1((QColor(m_color1)));
@@ -36,10 +39,26 @@ void Obstacles::paint(QPainter *painter) {
 }
 
 qreal Obstacles::meterInPixels() { return m_meterInPixels; }
+qreal Obstacles::xOffset() { return m_xOffset; }
+qreal Obstacles::yOffset() { return m_yOffset; }
 
 void Obstacles::setMeterInPixels(qreal meterInPixels) {
   if (m_meterInPixels != meterInPixels) {
     m_meterInPixels = meterInPixels;
     emit meterInPixelsChanged();
+  }
+}
+
+void Obstacles::setXOffset(qreal xOffset) {
+  if (m_xOffset != xOffset) {
+    m_xOffset = xOffset;
+    emit xOffsetChanged();
+  }
+}
+
+void Obstacles::setYOffset(qreal yOffset) {
+  if (m_yOffset != yOffset) {
+    m_yOffset = yOffset;
+    emit yOffsetChanged();
   }
 }

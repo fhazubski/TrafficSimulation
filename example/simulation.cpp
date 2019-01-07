@@ -26,10 +26,10 @@ void Simulation::setTime(qreal time) {
   }
 }
 
-void Simulation::addVehicle(qreal x, qreal y, qreal width, qreal height,
-                            qreal rotation, qreal velocity) {
-  tspAddVehicle(x, y, width, height, height * 0.85, width * 0.95, rotation,
-                velocity);
+void Simulation::addVehicle(qreal width, qreal height, qreal velocity,
+                            qint32 road, qint32 lane) {
+  tspAddVehicle(width, height, height * 0.85, width * 0.95, velocity,
+                roads[road], lane);
   m_vehicles.append(new Vehicle);
   emit vehiclesChanged();
 }

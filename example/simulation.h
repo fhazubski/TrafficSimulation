@@ -19,8 +19,8 @@ public:
 
 public slots:
   void setTime(qreal time);
-  void addVehicle(qreal x, qreal y, qreal width, qreal height, qreal rotation,
-                  qreal velocity);
+  void addVehicle(qreal width, qreal height, qreal velocity, qint32 road,
+                  qint32 lane);
   void overrideAxleAngle(quint8 vehicle, qreal angle);
 
 signals:
