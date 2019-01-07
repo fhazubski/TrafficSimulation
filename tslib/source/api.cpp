@@ -12,10 +12,10 @@ TSP::tsp_obstacle_line *tspReserveObstacleMemory(TSP::tsp_int obstacleCount) {
   return simulation.reserveObstacleMemory(obstacleCount);
 }
 
-bool tspAddVehicle(TSP::tsp_float x, TSP::tsp_float y, TSP::tsp_float width,
-                   TSP::tsp_float height, TSP::tsp_float axleDistance,
-                   TSP::tsp_float frontWheelsDistance, TSP::tsp_float rotation,
-                   TSP::tsp_float velocity) {
+bool tspAddVehicle(TSP::tsp_float width, TSP::tsp_float height,
+                   TSP::tsp_float axleDistance,
+                   TSP::tsp_float frontWheelsDistance, TSP::tsp_float velocity,
+                   const TSP::tsp_road *const startRoad, TSP::tsp_int startLane) {
   if (!HelperMath::inRange<tsp_float>(axleDistance, 0.0, height) &&
       axleDistance != 0.0) {
     std::cerr << "Axle value is less than or equal zero or greater than height"
@@ -23,11 +23,10 @@ bool tspAddVehicle(TSP::tsp_float x, TSP::tsp_float y, TSP::tsp_float width,
     return false;
   }
 
-  rotation = HelperMath::degreeToRadian(rotation);
   velocity = HelperMath::kmphToMps(velocity);
 
-  return simulation.addVehicle(x, y, width, height, axleDistance,
-                               frontWheelsDistance, rotation, velocity);
+  return simulation.addVehicle(width, height, axleDistance, frontWheelsDistance,
+                               velocity, startRoad, startLane);
 }
 
 void tspOverrideAxleAngle(TSP::tsp_id vehicle, TSP::tsp_float angle) {

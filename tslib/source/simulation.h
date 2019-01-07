@@ -8,9 +8,9 @@ class Simulation {
 public:
   tsp_vehicle *reserveVehicleMemory(tsp_int count);
   tsp_obstacle_line *reserveObstacleMemory(tsp_int count);
-  bool addVehicle(tsp_float x, tsp_float y, tsp_float width, tsp_float height,
-                  tsp_float axleDistance, tsp_float frontWheelsDistance,
-                  tsp_float rotation, tsp_float velocity);
+  bool addVehicle(tsp_float width, tsp_float height, tsp_float axleDistance,
+                  tsp_float frontWheelsDistance, tsp_float velocity,
+                  const tsp_road *const startRoad, tsp_int startLane);
   void overrideAxleAngle(TSP::tsp_id vehicle, TSP::tsp_float angle);
   bool setTime(tsp_float newTime);
 

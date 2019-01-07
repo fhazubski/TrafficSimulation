@@ -22,6 +22,8 @@ public:
                              const tsp_float velocityChange,
                              const tsp_float axleAngleChange,
                              const tsp_float timeChange);
+
+  static tsp_float lineToRotation(const tsp_position *const line);
 };
 
 } // namespace TSP

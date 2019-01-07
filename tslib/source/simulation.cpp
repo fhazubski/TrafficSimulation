@@ -23,24 +23,26 @@ tsp_obstacle_line *Simulation::reserveObstacleMemory(tsp_int count) {
   return obstacles;
 }
 
-bool Simulation::addVehicle(tsp_float x, tsp_float y, tsp_float width,
-                            tsp_float height, tsp_float axleDistance,
-                            tsp_float frontWheelsDistance, tsp_float rotation,
-                            tsp_float velocity) {
+bool Simulation::addVehicle(tsp_float width, tsp_float height,
+                            tsp_float axleDistance,
+                            tsp_float frontWheelsDistance, tsp_float velocity,
+                            const tsp_road *const startRoad,
+                            tsp_int startLane) {
   if (nextFree >= reservedVehiclesCount) {
     return false;
   }
-
+  vehicles[nextFree] = tsp_vehicle(startRoad);
   vehicles[nextFree].id = nextFree;
-  vehicles[nextFree].x = x;
-  vehicles[nextFree].y = y;
   vehicles[nextFree].width = width;
   vehicles[nextFree].height = height;
   vehicles[nextFree].axleAngle = 0.0;
   vehicles[nextFree].frontWheelsDistance = frontWheelsDistance;
   vehicles[nextFree].axleDistance = axleDistance;
-  vehicles[nextFree].rotation = rotation;
   vehicles[nextFree].velocity = velocity;
+  vehicles[nextFree].followedLane = startLane;
+  vehicles[nextFree].x = startRoad->lanes[startLane]->points[0].x;
+  vehicles[nextFree].y = startRoad->lanes[startLane]->points[0].y;
+  vehicles[nextFree].rotation = HelperMath::lineToRotation(startRoad->lanes[startLane]->points);
   nextFree++;
   vehiclesCount = nextFree;
 

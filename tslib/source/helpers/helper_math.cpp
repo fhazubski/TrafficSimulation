@@ -54,4 +54,8 @@ void HelperMath::updatePosition(tsp_vehicle &vehicle,
   vehicle.rotation += beta;
 }
 
+tsp_float HelperMath::lineToRotation(const tsp_position *const line) {
+  return std::atan2(line[1].y - line[0].y, line[1].x - line[0].x);
+}
+
 } // namespace TSP
